@@ -1,0 +1,29 @@
+body {
+    font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a.navbar-brand {
+    color: #216CB8 !important;
+}
+
+h4 {
+    color: #666;
+}
+
+
+[class*="col-"] {
+    padding: 5px !important;
+}
+
+.form-control {
+    margin: 0px !important;
+}
+
+.main-form {
+    padding: 0px 10px;
+    margin-bottom: 10px;
+}
+
+.red-border {
+    border: 1px solid red;
+}
