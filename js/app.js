@@ -41,6 +41,17 @@ var resetData = function () {
 var calculateDuration = function (inTime, outTime) {
     try {
         var ary1 = inTime.split(':'), ary2 = outTime.split(':');
+
+        // Validation for hours and mins limit (0 - 12, 0 - 60)
+        if(parseInt(ary1[0], 10) > 23 || parseInt(ary1[0], 10) < 0 ||
+            parseInt(ary2[0], 10) > 23 || parseInt(ary2[0], 10) < 0) {
+            return false;
+        }  
+        if(parseInt(ary1[1], 10) > 59 || parseInt(ary1[1], 10) < 0 ||
+            parseInt(ary2[1], 10) > 59 || parseInt(ary2[1], 10) < 0) {
+            return false;
+        }
+
         var minsdiff = parseInt(ary2[0], 10) * 60 + parseInt(ary2[1], 10)
             - parseInt(ary1[0], 10) * 60 - parseInt(ary1[1], 10);
 
