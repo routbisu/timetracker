@@ -2,17 +2,74 @@ body {
     font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.container {
+    padding: 0px !important;
+}
+
+.navbar {
+    padding: 0px;
+    border-radius: 0px !important;
+    background: #E11936 !important;
+    color: #FFF !important;
+    border: none;
+}
+
 a.navbar-brand {
-    color: #216CB8 !important;
+    color: #32CCCC !important;
+	font-size: 20px;
+	padding-left: 2px;
+}
+
+.navbar-default .navbar-nav > li >a {
+    color: #FFF;
+    font-weight: 600;
+    font-size: 90%;
+}
+
+.navbar-default .navbar-nav > .active > a, ul.navbar-nav :hover {
+    color: #fff !important;
+    background-color: #EE667A;
+    transition: 0.5s;
 }
 
 h4 {
     color: #666;
 }
 
+ul.navbar-nav {
+    color: #FFF !important;
+}
+
+.user-name {
+    vertical-align: middle;
+    padding: 10px 0px;
+}
+
+.avatar-icon {
+    border-radius: 50%;
+    vertical-align: middle;
+    width: 40px;
+}
+
+/*
+ul.navbar-nav :hover {
+    background-color : #DDD !important;
+    transition: 0.5s;
+    color: #FFF;
+}
+*/
+
+.glyphicon-time {
+	font-size: 16px;
+	right: 5px;
+}
 
 [class*="col-"] {
-    padding: 5px !important;
+    padding: 0px !important;
+}
+
+.main-form > [class*="col-"] {
+    padding: 3px !important;
 }
 
 .form-control {

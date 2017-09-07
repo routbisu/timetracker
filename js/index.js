@@ -43,6 +43,13 @@ var clearInputFields = function() {
     $(".main-form input[type='text']").val('');
 }
 
+var showDuration = function() {
+    var duration = calculateDuration($("#inTime").val(), $("#outTime").val());
+    if(duration && duration !== 'negative') {
+        $('#hours').val(duration);
+    }
+}
+
 $(document).ready(function () {
     $("#noLocalStorage").hide();
     $("#indexSuccessMsg").hide();
@@ -87,23 +94,28 @@ $(document).ready(function () {
     // Calculate total hours on key up event for intime and out time
     $("#inTime").keyup(function () {
         $('#hours').val('');
-        var duration = calculateDuration($("#inTime").val(), $("#outTime").val());
-        if(duration) {
-            if(duration !== 'negative') {
-                $('#hours').val(duration);
-            }
-        }
+		showDuration();
     });
 
     $("#outTime").keyup(function () {
-        $('#hours').val('');        
-        var duration = calculateDuration($("#inTime").val(), $("#outTime").val());
-        if(duration) {
-            if(duration !== 'negative') {
-                $('#hours').val(duration);
-            }
-        }
+        $('#hours').val('');
+		showDuration();
     });
 
     $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+	$("#inTime").timepicker({ 
+	  timeFormat: 'HH:mm',
+	  interval: 15,
+      dropdown: true,
+      scrollbar: true,
+      change: showDuration
+    });
+	
+	$("#outTime").timepicker({ 
+	  timeFormat: 'HH:mm',
+	  interval: 15,
+      dropdown: true,
+      scrollbar: true,
+      change: showDuration
+    });
 });
