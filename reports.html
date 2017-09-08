@@ -6,48 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <title>View Timesheet Report</title>
 </head>
 
 <body>
     <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="col-xs-9">
+        <div class="container-fluid">
+            <div class="col-xs-6">
                 <div class="navbar-header">
                     <a class="navbar-brand">
-                        <img src="img/logo.png" alt="Tech Mahindra Logo" width="85px" />
+                    <img src="img/logo.1png" alt="Logo" width="85px" />
                     </a>
-                    <ul class="nav navbar-nav">
-                        <li><a href="index.html">Timesheet Entry</a></li>
-                        <li class="active"><a href="reports.html">Timesheet Report</a></li>
-                        <li><a href="#" id="resetData">Erase All Data</a></li>
-                    </ul>
                 </div>
             </div>
-            <div class="col-xs-3 text-right user-name">
-                Kanakdeepa <img class="avatar-icon" src="img/profile.jpg" alt="">
+            <div class="col-xs-6 text-right user-name">
+                Welcome, Kanakdeepa <img class="avatar-icon" src="img/profile.jpg" alt="">
             </div>
         </div>
     </nav>
-    <div class="container">
-        <h4>View Timesheet report</h4>
-        <div class="alert alert-success" id="reportsSuccessMsg"></div>
-        <div class="alert alert-danger" id="reportsErrorMsg"></div>
-        <form>
-            <div class="row main-form">
-                <div class="col-sm-3 col-xs-12">
-                    <input type="text" class="form-control" id="searchEmpID" placeholder="Employee ID">
-                </div>
-                <div class="col-sm-4 col-xs-12">
-                    <button class="btn btn-success" id="showReport" type="submit" disabled>Fetch</button>
-                    <button class="btn btn-primary" id="showReportAll">Show All</button>
-                </div>
+    <div class="container-fluid">
+        <div class="main-menu">
+            <div class="thin-border-bottom">
+                <h4>Welcome, Kanakdeepa</h4>
+                <h6><i class="fa fa-clock-o"></i>Last log-in 3 mins ago</h6>
             </div>
-        </form>
+            <ul>
+                <li><a href="#">Self</a></li>
+                <ul class="sub-menu">
+                    <li class="active">
+                        <a href="index.html">
+                                <i class="fa fa-tachometer"></i>Timesheet Entry
+                                </a>
+                    </li>
+
+                </ul>
+                <li><a href="#">Manager</a></li>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="reports.html">
+                                <i class="fa fa-bar-chart"></i>Timesheet Report
+                                </a>
+                    </li>
+                    <li>
+                        <a href="#" id="resetData">
+                                <i class="fa fa-cog"></i>Erase All Data
+                                </a>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+        <div class="body-wrapper">
+            <h4>View Timesheet report</h4>
+            <div class="alert alert-success" id="reportsSuccessMsg"></div>
+            <div class="alert alert-danger" id="reportsErrorMsg"></div>
+            <form>
+                <div class="row main-form">
+                    <div class="col-sm-3 col-xs-12">
+                        <input type="text" class="form-control" id="searchEmpID" placeholder="Employee ID">
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <button class="btn btn-success" id="showReport" type="submit" disabled>Fetch</button>
+                        <button class="btn btn-primary" id="showReportAll">Show All</button>
+                    </div>
+                </div>
+            </form>
 
 
-        <div class="table-responsive" id="reportTable">
+            <div class="table-responsive" id="reportTable">
+            </div>
         </div>
     </div>
 
