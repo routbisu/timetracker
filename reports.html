@@ -9,28 +9,34 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
         crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/favicon.ico">
     <title>View Timesheet Report</title>
 </head>
 
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="col-xs-6">
+            <div class="col-xs-12 col-sm-3">
                 <div class="navbar-header">
-                    <a class="navbar-brand">
-                    <img src="img/logo.1png" alt="Logo" width="85px" />
-                    </a>
+                    <div class="navbar-brand">
+                        <span class="hamburger-menu">
+                                <i class="fa fa-big fa-bars color-eaeaea"></i> 
+                            </span>
+                        <a href="index.html">
+                                <img src="img/logo.png" alt="Logo" width="85px" />
+                            </a>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-6 text-right user-name">
-                Welcome, Kanakdeepa <img class="avatar-icon" src="img/profile.jpg" alt="">
+            <div class="col-sm-9 text-right user-name hidden-xs">
+                <a href="#">Logout<img class="avatar-icon" src="img/profile.jpg" alt=""></a>
             </div>
         </div>
     </nav>
     <div class="container-fluid">
         <div class="main-menu">
             <div class="thin-border-bottom">
-                <h4>Welcome, Kanakdeepa</h4>
+                <h4>Welcome, Kanakdeepa</h4>            
                 <h6><i class="fa fa-clock-o"></i>Last log-in 3 mins ago</h6>
             </div>
             <ul>
@@ -38,27 +44,27 @@
                 <ul class="sub-menu">
                     <li class="active">
                         <a href="index.html">
-                                <i class="fa fa-tachometer"></i>Timesheet Entry
-                                </a>
+                        <i class="fa fa-tachometer"></i>Timesheet Entry
+                        </a>
                     </li>
-
                 </ul>
                 <li><a href="#">Manager</a></li>
                 <ul class="sub-menu">
                     <li>
                         <a href="reports.html">
-                                <i class="fa fa-bar-chart"></i>Timesheet Report
-                                </a>
+                        <i class="fa fa-bar-chart"></i>Timesheet Report
+                        </a>
                     </li>
                     <li>
                         <a href="#" id="resetData">
-                                <i class="fa fa-cog"></i>Erase All Data
-                                </a>
+                        <i class="fa fa-cog"></i>Erase All Data
+                        </a>
                     </li>
                 </ul>
             </ul>
         </div>
         <div class="body-wrapper">
+            <h3 class="center-text"><i class="fa fa-big fa-clock-o"></i>Time Tracker</h3> 
             <h4>View Timesheet report</h4>
             <div class="alert alert-success" id="reportsSuccessMsg"></div>
             <div class="alert alert-danger" id="reportsErrorMsg"></div>
@@ -73,7 +79,6 @@
                     </div>
                 </div>
             </form>
-
 
             <div class="table-responsive" id="reportTable">
             </div>

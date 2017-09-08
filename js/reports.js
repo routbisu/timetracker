@@ -39,12 +39,6 @@ $(document).ready(function () {
     $("#reportTable").hide();
 
     checkLocalStorage();
-
-    $("#resetData").click(function (evt) {
-        resetData();
-        evt.preventDefault();
-        alert('All timesheet has been erased!');
-    });
     
     $("#showReportAll").click(function(evt) {
         evt.preventDefault();

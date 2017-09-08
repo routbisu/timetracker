@@ -80,3 +80,14 @@ var showMessage = function(pageName, type, msg, fadeOut = false, duration = 3000
         }, duration);
     }
 }
+
+// Handle delete all data
+$(document).ready(function() {
+    $("#resetData").click(function (evt) {
+        if(confirm('Are you sure you want to delete all the data?')) {
+            resetData();
+            evt.preventDefault();
+            alert('All timesheet has been erased!');
+        }
+    });
+});

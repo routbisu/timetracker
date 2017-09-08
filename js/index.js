@@ -82,14 +82,7 @@ $(document).ready(function () {
             clearInputFields();
             showMessage('index', 'Success', 'Timesheet data saved successfully', true);
         }
-
     })
-
-    $("#resetData").click(function (evt) {
-        resetData();
-        evt.preventDefault();
-        alert('All timesheet has been erased!');
-    });
 
     // Calculate total hours on key up event for intime and out time
     $("#inTime").keyup(function () {
