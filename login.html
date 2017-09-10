@@ -14,6 +14,12 @@
 </head>
 
 <body>
+    <script>
+        if((sessionStorage.getItem('LoggedInID') && sessionStorage.getItem('LoggedInID') !== "null")
+            && (sessionStorage.getItem('LoggedInName') && sessionStorage.getItem('LoggedInName') !== "null")) {   
+            window.location = 'index.html';
+        }
+    </script>
     <div class="login-container">
         <img src="img/logo.png" alt="Tech Mahindra Logo">
         <div class="login-box">

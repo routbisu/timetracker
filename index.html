@@ -17,7 +17,8 @@
 
 <body>
     <script>
-        if(sessionStorage.getItem('LoggedInID') == null && sessionStorage.getItem('LoggedInName') == null) {   
+        if((!sessionStorage.getItem('LoggedInID') || sessionStorage.getItem('LoggedInID') == "null")
+            && (!sessionStorage.getItem('LoggedInName') || sessionStorage.getItem('LoggedInName') == "null")) {   
             window.location = 'login.html';
         }
     </script>
@@ -36,12 +37,12 @@
                 </div>
             </div>
             <div class="col-sm-9 text-right user-name hidden-xs">
-               <a href="#">Logout<img class="avatar-icon" src="img/profile.jpg" alt=""></a>
+               <a href="#" onclick="logOut();" >Logout<img class="avatar-icon" src="img/profile.jpg" alt=""></a>
             </div>
         </div>
     </nav>
     <div class="container-fluid">
-        <div class="main-menu">
+        <div class="main-menu" id="main-menu">
             <div class="thin-border-bottom">
                 <h4 id="logInUserWelcome"></h4>           
                 <h6><i class="fa fa-clock-o"></i>Last log-in 3 mins ago</h6>
@@ -68,6 +69,11 @@
                         </a>
                     </li>
                 </ul>
+                <li class="mobile-signout">
+                    <a href="#" onclick="logOut();">
+                    <i class="fa fa-sign-out"></i>Logout
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="body-wrapper">
@@ -79,10 +85,10 @@
 
             <div class="row main-form">
                 <div class="col-sm-2 col-xs-12">
-                    <input type="text" class="form-control" id="empId" placeholder="Employee ID">
+                    <input type="text" class="form-control" id="empId" placeholder="Employee ID" disabled>
                 </div>
                 <div class="col-sm-2 col-xs-12">
-                    <input type="text" class="form-control" id="empName" placeholder="Employee Name">
+                    <input type="text" class="form-control" id="empName" placeholder="Employee Name" disabled>
                 </div>
                 <div class="col-sm-2 col-xs-12">
                     <input type="text" class="form-control" id="date" placeholder="Date">

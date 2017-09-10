@@ -40,11 +40,20 @@ var validateInput = function() {
 }
 
 var clearInputFields = function() {
-    $(".main-form input[type='text']").val('');
+    $("#date").val('');
+    $("#inTime").val('');
+    $("#outTime").val('');
+    $("#hours").val('');
 }
 
 var showDuration = function() {
-    var duration = calculateDuration($("#inTime").val(), $("#outTime").val());
+    $('#hours').removeClass("min-hours");
+    var duration = calculateDuration($("#inTime").val(), $("#outTime").val(), function() {
+        $('#hours').addClass("min-hours");
+    }, function() {
+        $('#hours').removeClass("min-hours");
+    });
+
     if(duration && duration !== 'negative') {
         $('#hours').val(duration);
     }
@@ -61,6 +70,11 @@ $(document).ready(function () {
     $("#indexErrorMsg").hide();
 
     checkLocalStorage();
+
+    // Show logged in user info in timesheet form
+    var loggedInUser = getLoggedInUser();
+    $("#empId").val(loggedInUser.EmpID);
+    $("#empName").val(loggedInUser.EmpName);
 
     $("#btnSaveTimesheet").click(function () {
         // Validate input date
@@ -115,5 +129,20 @@ $(document).ready(function () {
       dropdown: true,
       scrollbar: true,
       change: showDuration
+    });
+
+    $("#date").change(function() {
+        $("#inTime").val('');
+        $("#outTime").val('');
+        $("#hours").val('');
+        showDuration();
+
+        var date = $("#date").val();
+        var empData = fetchTimeSheetForEmp(getLoggedInUser().EmpID, date);
+        if(empData) {
+            $("#inTime").val(empData.InTime);
+            $("#outTime").val(empData.OutTime);
+            showDuration();
+        }
     });
 });

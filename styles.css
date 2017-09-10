@@ -1,5 +1,6 @@
 body {
     font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
+    color: #666;
 }
 
 .container {
@@ -8,6 +9,11 @@ body {
 
 .center-text {
     text-align: center
+}
+
+.generate-csv {
+    text-align: right;
+    margin-bottom: 5px;
 }
 
 h3 {
@@ -191,17 +197,34 @@ ul.sub-menu li a:hover {
     color: #EAEAEA;
 }
 
+.min-hours {
+    border: 1px solid #f44242;
+    background-color: #ffe2e2 !important;
+}
+
+
+
+/* .menu-hidden {
+    visibility: hidden !important;
+} */
+
 /* Responsive Menu */
+/* For Mobile */
 @media (max-width: 500px) {
     .main-menu { 
+        z-index: 1000;
+        position: fixed;
+        width: 0px;
+        top: 0;
+        left: 0;
         visibility: hidden;
+        transition: 0.3s;
     }
     .body-wrapper {
         margin-left: 0px;
     }
-    
 }
-
+/* For Desktop */
 @media (min-width: 500px) { 
     .hamburger-menu {
         display: none;
@@ -209,4 +232,13 @@ ul.sub-menu li a:hover {
     .navbar-brand {
         padding-left: 20px !important;
     }
+    .mobile-signout {
+        display: none;
+    }
+}
+
+.menu-visible {
+    visibility: visible;
+    width: 220px;
+    transition: 0.3s;
 }

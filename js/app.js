@@ -41,15 +41,30 @@ var getLoggedInUser = function() {
 
 // Logout current user
 var logOut = function() {
-    sessionStorage.LoggedInID = null;
-    sessionStorage.LoggedInName = null;    
+    sessionStorage.removeItem('LoggedInID');
+    sessionStorage.removeItem('LoggedInName');    
+    redirectTo('login.html');
 }
 
 /* Functions for timesheet operations */
-
+// Add timesheet - Overwrites any existing record for same day
 var addTimesheet = function (timesheet) {
     var timesheetData = JSON.parse(localStorage.TimeTrackerData);
-    timesheetData.push(timesheet);
+    var isExist = false;
+
+    for(var i = 0; i < timesheetData.length; i++) {
+        if(timesheetData[i].Date === timesheet.Date && timesheetData[i].EmpID === timesheet.EmpID) {
+            timesheetData[i].InTime = timesheet.InTime;
+            timesheetData[i].OutTime = timesheet.OutTime;
+            timesheetData[i].Hours = timesheet.Hours;
+            isExist = true;
+        }
+    }
+
+    if(!isExist) {
+        timesheetData.push(timesheet);
+    }
+
     localStorage.TimeTrackerData = JSON.stringify(timesheetData);
 }
 
@@ -68,12 +83,27 @@ var fetchTimesheet = function (empID, isAll) {
     }
 }
 
+var fetchTimeSheetForEmp = function(empID, date) {
+    // Fetch timesheet data
+    var timesheetData = JSON.parse(localStorage.TimeTrackerData);
+    // Filter for employee ID
+    var employeeData = timesheetData.filter(function (data) {
+        return (data.EmpID === empID && data.Date === date);
+    });
+    if(employeeData.length > 0) {
+        return employeeData[0];
+    } else {
+        return false;
+    }
+}
+
 var resetData = function () {
     localStorage.TimeTrackerData = JSON.stringify([]);
     location.reload();
 }
 
-var calculateDuration = function (inTime, outTime) {
+// The callback will be called when working hours is less than 4 hours
+var calculateDuration = function (inTime, outTime, lessHours = null, moreHours = null) {
     try {
         var ary1 = inTime.split(':'), ary2 = outTime.split(':');
 
@@ -99,8 +129,19 @@ var calculateDuration = function (inTime, outTime) {
         if (isNaN(hoursDiff) || isNaN(minsDiff)) {
             return false;
         }
+
+        // If time is less than 4 hours (240 minutes) then execute the callback
+        if(lessHours !== null || moreHours !== null) {
+            if(((hoursDiff - 100) * 60 + (minsDiff - 100)) < (240)) {
+                lessHours();
+            } else {
+                moreHours();
+            }
+        }
+        
         return String(String(hoursDiff).substr(1) + ':' + String(minsDiff).substr(1));
     } catch (ex) {
+        console.log(ex);
         return false;
     }
 }
@@ -161,6 +202,28 @@ var addUser = function(empID, empName, password) {
     return 'success';
 }
 
+// Prompt user to Download CSV
+var downloadCSV = function(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
+// Generate CSV text and download
+var generateCSV = function() {
+    var csvData = Papa.unparse(JSON.parse(sessionStorage.lastReport));
+    console.log(csvData);
+    if(csvData && csvData.length > 0)
+        downloadCSV('TimesheetReport.csv', csvData);
+    else 
+        alert('There was an unexpected error');
+}
+
+
 // Handle delete all data
 $(document).ready(function() {
     $("#resetData").click(function (evt) {
@@ -173,4 +236,17 @@ $(document).ready(function() {
 
     var loggedInUser = getLoggedInUser();
     $("#logInUserWelcome").text('Welcome, ' + loggedInUser.EmpName);
+
+    $(".hamburger-menu").click(function(evt) {
+        $(".main-menu").addClass('menu-visible');
+        evt.stopPropagation();
+    });
+
+    $(window).click(function() {
+        $(".main-menu").removeClass('menu-visible');
+    });
+
+    $(".main-menu").click(function(evt) {
+        evt.stopPropagation();
+    });
 });

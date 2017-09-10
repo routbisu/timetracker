@@ -1,6 +1,11 @@
 var showReport = function(timeSheetData) {
+    sessionStorage.lastReport = JSON.stringify(timeSheetData);
+
     if(timeSheetData) {
-        var tableHTML = `<table class="table table-hover table-condensed">
+        var tableHTML = `
+        <div class="generate-csv"><button class="btn btn-xs btn-danger" onclick="generateCSV()">Download CSV</button></div>
+                        <div class="table-responsive">
+                        <table class="table table-hover table-condensed">
                         <thead>
                             <tr>
                                 <th>Employee ID</th>
@@ -25,7 +30,10 @@ var showReport = function(timeSheetData) {
             });
 
             tableHTML += `</tbody>
-                        </table>`;
+                        </table>
+                        </div>
+                        </div>
+                        `;
 
         $("#reportTable").html(tableHTML);
         $("#reportTable").slideDown();
