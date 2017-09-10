@@ -50,6 +50,11 @@ var showDuration = function() {
     }
 }
 
+// Check login
+// if(!isLoggedIn()) {
+//     redirectTo('login.html');
+// }
+
 $(document).ready(function () {
     $("#noLocalStorage").hide();
     $("#indexSuccessMsg").hide();

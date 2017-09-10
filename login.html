@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="styles-login.css">
+    <link rel="icon" href="img/favicon.ico">
+    <title>Tech Mahindra | Timetracker Login</title>
+</head>
+
+<body>
+    <div class="login-container">
+        <img src="img/logo.png" alt="Tech Mahindra Logo">
+        <div class="login-box">
+            <div class="alert alert-warning" id="loginErrorMessage"></div>
+            <form id="loginArea">
+                <div class="form-group">
+                    <label for="txtLoginEmpID">Employee ID</label>
+                    <input type="text" class="form-control" id="txtLoginEmpID">
+                </div>
+                <div class="form-group">
+                    <label for="txtLoginPassword">Password</label>
+                    <input type="password" class="form-control" id="txtLoginPassword">
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Sign In</button>
+            </form>
+
+            <form id="signupArea">
+                <div class="form-group">
+                    <label for="txtSignupEmpID">Employee ID</label>
+                    <input type="number" min="0" step="1" min="10000" max="99999" class="form-control" id="txtSignupEmpID">
+                </div>
+                <div class="form-group">
+                    <label for="txtSignupEmpName">Employee Name</label>
+                    <input type="text" class="form-control" id="txtSignupEmpName">
+                </div>
+                <div class="form-group">
+                    <label for="txtSignupPassword">Password</label>
+                    <input type="password" class="form-control" id="txtSignupPassword">
+                </div>
+                <div class="form-group">
+                    <label for="txtSignupPassword1">Confirm Password</label>
+                    <input type="password" class="form-control" id="txtSignupPassword1">
+                </div>
+                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add Employee</button>
+            </form>
+        </div>
+        <div class="signup-box center-align">
+            <a href="#" id="signupLink"><i class="fa fa-plus"></i> Add new employee</a>
+            <a href="#" id="loginLink"><i class="fa fa-user"></i> Employee Login</a>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>

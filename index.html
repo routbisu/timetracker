@@ -16,6 +16,11 @@
 </head>
 
 <body>
+    <script>
+        if(sessionStorage.getItem('LoggedInID') == null && sessionStorage.getItem('LoggedInName') == null) {   
+            window.location = 'login.html';
+        }
+    </script>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="col-xs-12 col-sm-3">
@@ -38,7 +43,7 @@
     <div class="container-fluid">
         <div class="main-menu">
             <div class="thin-border-bottom">
-                <h4>Welcome, Kanakdeepa</h4>            
+                <h4 id="logInUserWelcome"></h4>           
                 <h6><i class="fa fa-clock-o"></i>Last log-in 3 mins ago</h6>
             </div>
             <ul>
@@ -95,27 +100,6 @@
                     <button class="btn btn-primary" id="btnSaveTimesheet">Save</button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-    
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-            <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    
         </div>
     </div>
 
