@@ -2,38 +2,34 @@ var showReport = function(timeSheetData) {
     sessionStorage.lastReport = JSON.stringify(timeSheetData);
 
     if(timeSheetData) {
-        var tableHTML = `
-        <div class="generate-csv"><button class="btn btn-xs btn-danger" onclick="generateCSV()">Download CSV</button></div>
-                        <div class="table-responsive">
-                        <table class="table table-hover table-condensed">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Employee Name</th>
-                                <th>Date</th>
-                                <th>In Time</th>
-                                <th>Out Time</th>
-                                <th>Total Hours</th>
-                            </tr>
-                        </thead>
-                        <tbody>`;
+        var tableHTML = 
+        '<div class="generate-csv"><button class="btn btn-xs btn-danger" onclick="generateCSV()">Download CSV</button></div>'
+                        + '<div class="table-responsive">'
+                        + '<table class="table table-hover table-condensed">'
+                        + '<thead>'
+                        + '    <tr>'
+                        + '        <th>Employee ID</th>'
+                        + '        <th>Employee Name</th>'
+                        + '        <th>Date</th>'
+                        + '        <th>In Time</th>'
+                        + '        <th>Out Time</th>'
+                        + '        <th>Total Hours</th>'
+                        + '    </tr>'
+                        + '</thead>'
+                        + '<tbody>';
 
             $.each(timeSheetData, function(index, value) {
-                tableHTML += `<tr>
-                                <td>` + value.EmpID + `</td>
-                                <td>` + value.EmpName + `</td>
-                                <td>` + value.Date + `</td>
-                                <td>` + value.InTime + `</td>
-                                <td>` + value.OutTime + `</td>
-                                <td>` + value.Hours + `</td>
-                            </tr>`
+                tableHTML += '<tr>' +
+                                '<td>' + value.EmpID + '</td>' +
+                                '<td>' + value.EmpName + '</td>' +
+                                '<td>' + value.Date + '</td>' +
+                                '<td>' + value.InTime + '</td>' +
+                                '<td>' + value.OutTime + '</td>' +
+                                '<td>' + value.Hours + '</td>' +
+                            '</tr>'
             });
 
-            tableHTML += `</tbody>
-                        </table>
-                        </div>
-                        </div>
-                        `;
+            tableHTML += '</tbody></table></div></div>';
 
         $("#reportTable").html(tableHTML);
         $("#reportTable").slideDown();
