@@ -85,7 +85,13 @@ $(document).ready(function () {
                 return;
             } else {
                 if(duration == 'negative') {
-                    showMessage('index', 'Error', 'In-time can not be more than out-time');
+                    // If log-out time is next day, then change logout time to 23:59
+                    if(confirm('Is the log-out time on next day?')) {
+                      showMessage('index', 'Error', 'Max log-out time for a day can be 23:59.');
+                       $("#outTime").val('23:59');
+                    } else {
+                      showMessage('index', 'Error', 'In-time can not be more than out-time');
+                    }
                     return;
                 }
             }
@@ -100,6 +106,7 @@ $(document).ready(function () {
             });
             clearInputFields();
             showMessage('index', 'Success', 'Timesheet data saved successfully', true);
+            setLastLoginTime();
         }
     })
 
@@ -115,15 +122,15 @@ $(document).ready(function () {
     });
 
     $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
-	$("#inTime").timepicker({ 
+	$("#inTime").timepicker({
 	  timeFormat: 'HH:mm',
 	  interval: 15,
       dropdown: true,
       scrollbar: true,
       change: showDuration
     });
-	
-	$("#outTime").timepicker({ 
+
+	$("#outTime").timepicker({
 	  timeFormat: 'HH:mm',
 	  interval: 15,
       dropdown: true,

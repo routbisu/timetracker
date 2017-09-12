@@ -1,5 +1,6 @@
 // Check if local storage is supported by browser
 //var employeeData = [];
+var CHECK_LOGINTIME_TIMER = 2000;
 
 var checkLocalStorage = function () {
     if (typeof (Storage) === "undefined") {
@@ -8,6 +9,11 @@ var checkLocalStorage = function () {
         if (!localStorage.getItem('TimeTrackerData')) {
             // Create instance if not found
             localStorage.TimeTrackerData = JSON.stringify([]);
+        }
+        if (!localStorage.getItem('LastLoginTime')) {
+            // Create instance if not found
+            var nowTimestamp = new Date();
+            localStorage.LastLoginTime = nowTimestamp.toLocaleString();
         }
         if (!localStorage.getItem('UserData')) {
             // Add default user
@@ -33,7 +39,7 @@ var isLoggedIn = function() {
 
 // Get an object for logged in user
 var getLoggedInUser = function() {
-    return { 
+    return {
         EmpID: sessionStorage.LoggedInID,
         EmpName: sessionStorage.LoggedInName
     };
@@ -42,8 +48,43 @@ var getLoggedInUser = function() {
 // Logout current user
 var logOut = function() {
     sessionStorage.removeItem('LoggedInID');
-    sessionStorage.removeItem('LoggedInName');    
+    sessionStorage.removeItem('LoggedInName');
     redirectTo('login.html');
+}
+
+// Calculate time difference from Locale Time Strings
+var calculateTimeDifference = function(time1, time2) {
+  try {
+    var t1 = new Date(time1);
+    var t2 = new Date(time2);
+    var timeDiffStr = '';
+
+    var diffSeconds = Math.abs(t2 - t1) / 1000;
+
+    if(diffSeconds < 60) {
+      timeDiffStr = 'Just now';
+    } else if(diffSeconds < 3600) {
+      timeDiffStr = Math.round(diffSeconds / 60) + ' min(s) ago';
+    } else if(diffSeconds < 86400) {
+      timeDiffStr = Math.round(diffSeconds / 3600) + ' hour(s) ago';
+    } else if(diffSeconds >= 86400) {
+      timeDiffStr = Math.round(diffSeconds / 86400) + ' day(s) ago';
+    }
+
+    return timeDiffStr;
+  } catch(ex) {
+    return false;
+  }
+}
+
+// Get last login duration (n mins/hours ago)
+var getLastLoginDuration = function() {
+  var nowTimeString = (new Date()).toLocaleString();
+  return calculateTimeDifference(localStorage.LastLoginTime, nowTimeString);
+}
+
+var setLastLoginTime = function() {
+  localStorage.LastLoginTime = (new Date()).toLocaleString();
 }
 
 /* Functions for timesheet operations */
@@ -111,7 +152,7 @@ var calculateDuration = function (inTime, outTime, lessHours = null, moreHours =
         if(parseInt(ary1[0], 10) > 23 || parseInt(ary1[0], 10) < 0 ||
             parseInt(ary2[0], 10) > 23 || parseInt(ary2[0], 10) < 0) {
             return false;
-        }  
+        }
         if(parseInt(ary1[1], 10) > 59 || parseInt(ary1[1], 10) < 0 ||
             parseInt(ary2[1], 10) > 59 || parseInt(ary2[1], 10) < 0) {
             return false;
@@ -138,7 +179,7 @@ var calculateDuration = function (inTime, outTime, lessHours = null, moreHours =
                 moreHours();
             }
         }
-        
+
         return String(String(hoursDiff).substr(1) + ':' + String(minsDiff).substr(1));
     } catch (ex) {
         console.log(ex);
@@ -181,7 +222,7 @@ var isAlreadyExistUser = function(empID) {
         if(data.EmpID == empID)
             return data;
     });
-    if(user.length > 0) 
+    if(user.length > 0)
         return true;
 
     return false;
@@ -219,7 +260,7 @@ var generateCSV = function() {
     console.log(csvData);
     if(csvData && csvData.length > 0)
         downloadCSV('TimesheetReport.csv', csvData);
-    else 
+    else
         alert('There was an unexpected error');
 }
 
@@ -249,4 +290,10 @@ $(document).ready(function() {
     $(".main-menu").click(function(evt) {
         evt.stopPropagation();
     });
+
+    // Call get last login duration every 1 min
+    setInterval(function() {
+      var lastLoginDuration = getLastLoginDuration();
+      $("#last-login-duration").text(lastLoginDuration);
+    }, CHECK_LOGINTIME_TIMER);
 });
